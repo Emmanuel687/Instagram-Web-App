@@ -1,0 +1,12 @@
+h1 {
+    color: crimson;
+}
+
+.bg-dark {
+    color: rgb(241, 135, 206);
+}
+
+.large {
+    width: 80%;
+    height: 800%
+}
