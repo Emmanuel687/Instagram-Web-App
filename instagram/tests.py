@@ -28,7 +28,7 @@ class ProfileTestCase(TestCase):
 
     # Set up method
     def setUp(self):
-        self.name= Profile(name='Brenda')
+        self.name= Profile(name='Manu,Koech')
 
     # Testing instance
     def test_instance(self):
