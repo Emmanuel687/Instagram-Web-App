@@ -15,3 +15,19 @@ class Image(models.Model):
     
     def __str__(self):
         return self.name
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        images = cls.objects.filter(
+            image_name_contains=search_term)
+        return images
+    
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+    
+    def update_caption(self, new_caption):
+        self.image_caption = new_caption
+        self.save()
