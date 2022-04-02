@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Comment,Image,Like,Profile
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Create your views here.
 # def welcome(request):
 #     return HttpResponse('Welcome to my Instagram Page')
