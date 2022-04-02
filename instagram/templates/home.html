@@ -1,0 +1,36 @@
+{% extends "base.html" %} {%load static%} {% block content %}
+
+<div class="container-fluid background">
+    <div class="row w-50 mx-auto">
+        {% for image in image %}
+        <div class="card my-4  large" style="max-width: 100%;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{% url 'user.profile' image.user.id %}">
+                        <img src="{{image.user.profile.profile_photo.url}}" class="user-avatar border-radius me-2" height='30px' width="30px" alt="Profile Photo">
+                    </a>
+                    <a href="{% url 'user.profile' image.user.id %}">
+                        <h6>{{image.user.username}}</h6>
+                    </a>
+                </div>
+                <h2>...</h2>
+            </div>
+            <img src="{{ image.image.url }}" class="img-fluid" alt="Post Image">
+            <div class="card-body">
+                <i class="far fa-heart"></i>
+                <p class="fade-item">{{image.likes }} Likes </p>
+                <h6 class="">{{image.user.username}} {{ image.caption|slice:":20" }}<small><span
+                            class="text-muted"> <a href="{% url 'single.image' image.id %}">...Read
+                                More</a></span>
+                    </small>
+                </h6>
+                <a href="{% url 'single.image' image.id %}">
+                    <p class="text-muted">View all {{image.comments }} Comments
+                    </p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+    </div>
+    {% endblock %}

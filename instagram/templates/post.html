@@ -1,0 +1,93 @@
+{% extends "base.html" %} {% load static%} {% block content %}
+<section class="blog-section">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{ image.image.url }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="row g-0">
+
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ image.name }}</h5>
+                                <p class="card-text">
+                                    {{image.caption }}
+                                </p>
+
+                                {% if comments %} {% for comment in comments %}
+                                <div class="d-flex justify-content-start card mb-3">
+                                    <div class="img-box">
+                                        <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="">
+                                    </div>
+                                    <div class="m-2">
+                                        <h6>{{ comment.user.username }}</h6>
+
+                                    </div>
+                                    <p class="m-2">
+                                        {{comment.comment }}
+                                    </p>
+                                </div>
+                                {% endfor %} {% endif %}
+
+                                <!-- comment form -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="{% url 'comment.add' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Comment</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" required></textarea>
+                                                <input type="hidden" name="image_id" value="{{ image.id }}">
+                                            </div>
+                                            <button type="submit" class="btn mt-4 floar-right">Add Comment</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-capitalize mt-4">More posts from <strong>{{ image.user.username }}</strong></p>
+            <div class="container-fluid background">
+                <div class="row w-50 mx-auto">
+                    {% for image in images %}
+                    <div class="card my-4" style="max-width: 100%;">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="{% url 'user.profile' image.user.id %}">
+                                    <img src="{{image.user.profile.profile_photo.url}}" class="user-avatar border-radius me-2" height='30px' width="30px" alt="Profile Photo">
+                                </a>
+                                <a href="{% url 'user.profile' image.user.id %}">
+                                    <h6>{{image.user.username}}</h6>
+                                </a>
+
+                            </div>
+                            <h2>...</h2>
+                        </div>
+                        <img src="{{ image.image.url }}" class="img-fluid" alt="...">
+                        <p class="fade-item">{{image.likes }} Likes </p>
+                        <h6 class="">{{image.user.username}} {{ image.caption|slice:":20" }}<small><span
+                                        class="text-muted"> <a href="{% url 'single.image' image.id %}">...Read
+                                            More</a></span></small> </h6>
+                        <a href="{% url 'single.image' image.id %}">
+                            <p class="text-muted">View All {{image.comments }} Comments
+                            </p>
+                        </a>
+
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %}
