@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'gram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
+        'NAME': 'instagram2',
         'USER': 'manu',
     'PASSWORD':'39906875',
     }
